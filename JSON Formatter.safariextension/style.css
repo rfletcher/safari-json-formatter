@@ -37,6 +37,10 @@ dt {
 /* values */
 span.value { color: #339; }
 span.string, span.string .decorator { color: #393; }
+span.string {
+  display: block;
+  margin-left: 1.5em;
+}
 
 /* separation between labels and values */
 dt { margin-right: 0.5em; }
