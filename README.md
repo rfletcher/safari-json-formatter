@@ -16,12 +16,12 @@ commit][2] makes a good example.
 
 #### Caveats
 The extension aims to produce the same JSON string that's been loaded as input,
-but because the original JSON has actually been parsed some transformation may
+but because the original JSON has actually been parsed, some transformation may
 occur. In other words, the formatted JSON will always be equivalent to the
 original JSON, but in rare circumstances it may not match exactly. The only
-known example of this is conversion between number formats -- if the original
-JSON contains the number 1e2, for example, the formatted JSON will display the
-value 100.
+known example of this is kind of discrepancy is between number formats -- if the
+original JSON contains the numeric value 1e2, for example, the formatted JSON
+will display the value 100.
 
 [1]: http://github.com/downloads/rfletcher/safari-json-formatter/JSON%20Formatter.safariextz
 [2]: http://github.com/rfletcher/safari-json-formatter/commit/HEAD.json
