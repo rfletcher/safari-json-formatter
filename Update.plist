@@ -12,7 +12,7 @@
        <key>CFBundleVersion</key>
        <string>2</string>
        <key>CFBundleShortVersionString</key>
-       <string>1.0</string>
+       <string>1.0.1</string>
        <key>URL</key>
        <string>http://github.com/downloads/rfletcher/safari-json-formatter/JSON%20Formatter.safariextz</string>
      </dict>
