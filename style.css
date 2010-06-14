@@ -36,6 +36,9 @@ dt {
 
 /* values */
 span.value { color: #339; }
+span.string {
+  white-space: pre-wrap;
+}
 span.string, span.string .decorator { color: #393; }
 
 /* separation between labels and values */
