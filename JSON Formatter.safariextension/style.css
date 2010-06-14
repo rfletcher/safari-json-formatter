@@ -40,6 +40,7 @@ span.string, span.string .decorator { color: #393; }
 span.string {
   display: block;
   margin-left: 1.5em;
+  white-space: pre-wrap;
 }
 
 /* separation between labels and values */

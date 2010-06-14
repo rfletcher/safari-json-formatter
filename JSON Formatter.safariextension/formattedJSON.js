@@ -7,9 +7,12 @@
     init: function() {
       // attempt to parse the body as JSON
       try {
-        var obj = JSON.parse( document.body.textContent );
+        var obj = JSON.parse( document.body.textContent
+          .split( "\\" ).join( "\\\\" ) // double-up on escape sequences
+          .split( '\\\"' ).join( "\\\\\"" ) // at this point quotes have been unescaped.  re-escape them.
+        );
       } catch( e ) {
-        // not valid JSON :(
+        // invalid JSON :(
         return;
       }
 
