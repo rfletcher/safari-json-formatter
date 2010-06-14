@@ -1,5 +1,5 @@
 ( function() {
-  var formatJSON = {
+  var settings = {}, formatJSON = {
     /**
      * attempt to reformat the current document as JSON
      *  TODO: examine the document's content-type (appears to be impossible)
@@ -15,8 +15,20 @@
 
       // hide the unformatted JSON text
       document.body.innerHTML = "";
-      // render formatted JSON
-      this._append( document.body, this.render( obj ) );
+
+      // receive settings from proxy.html
+      safari.self.addEventListener( "message", function( e ) {
+        if( e.name === "setSettings" ) {
+          settings = e.message;
+
+          // render formatted JSON
+          formatJSON._append( document.body, formatJSON.render( obj ) );
+        }
+      }, false );
+
+      // ask proxy.html for settings
+      safari.self.tab.dispatchMessage( "getSettings" );
+
     },
 
     /**
@@ -94,11 +106,21 @@
      *  renderObject( {} ) => Element
      */
     renderObject: function( obj ) {
-      var list = this._html( "<dl/>" );
+      var keys = [], list = this._html( "<dl/>" );
+
+      // gather keys for sorting
       for( var i in obj ) {
-        this._append( list, this._append( this._html( "<dt/>" ), this._html( '<span class="decorator">"</span>', document.createTextNode( i ), '<span class="decorator">"</span>', '<span class="delimiter">:</span>' ) ) );
-        this._append( list, this._append( this._html( "<dd/>" ), this.render( obj[i] ) ) );
+        keys.push( i );
       }
+      if( settings.sort_keys ) {
+        keys = keys.sort();
+      }
+
+      for( var i = 0, ii = keys.length; i < ii; i++ ) {
+        this._append( list, this._append( this._html( "<dt/>" ), this._html( '<span class="decorator">"</span>', document.createTextNode( keys[i] ), '<span class="decorator">"</span>', '<span class="delimiter">:</span>' ) ) );
+        this._append( list, this._append( this._html( "<dd/>" ), this.render( obj[keys[i]] ) ) );
+      }
+
       return this._append(
         this._html( '<div class="object"/>' ),
           this._html( '<span class="decorator">{</span>',
