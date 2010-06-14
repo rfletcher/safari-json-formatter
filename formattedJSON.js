@@ -77,10 +77,16 @@
     renderArray: function( a ) {
       var list = this._html( "<ol/>" );
       for( var i = 0, ii = a.length; i < ii; i++ ) {
-        var li = this._append( this._html( "<li/>" ), this.render( a[i] ) );
-        this._append( list, li );
+        this._append( list, this._append( this._html( "<li/>" ), this.render( a[i] ) ) );
       }
-      return this._append( this._html( '<div class="array"/>' ), this._html( '<span class="decorator">[</span>', list, '<span class="decorator">]</span>', '<span class="separator">,</span>' ) );
+      return this._append(
+        this._html( '<div class="array"/>' ),
+          this._html(
+            '<span class="decorator">[</span>',
+            list.childNodes.length ? list : '',
+            '<span class="decorator">]</span>', '<span class="separator">,</span>'
+          )
+        );
     },
 
     /**
@@ -93,7 +99,14 @@
         this._append( list, this._append( this._html( "<dt/>" ), this._html( '<span class="decorator">"</span>', document.createTextNode( i ), '<span class="decorator">"</span>', '<span class="delimiter">:</span>' ) ) );
         this._append( list, this._append( this._html( "<dd/>" ), this.render( obj[i] ) ) );
       }
-      return this._append( this._html( '<div class="object"/>' ), this._html( '<span class="decorator">{</span>', list, '<span class="decorator">}</span>', '<span class="separator">,</span>' ) );
+      return this._append(
+        this._html( '<div class="object"/>' ),
+          this._html( '<span class="decorator">{</span>',
+            list.childNodes.length ? list : '',
+            '<span class="decorator">}</span>',
+            '<span class="separator">,</span>'
+          )
+        );
     },
 
     /**
