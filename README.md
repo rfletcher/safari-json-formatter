@@ -25,5 +25,5 @@ value 100.
 
 [1]: http://github.com/downloads/rfletcher/safari-json-formatter/JSON%20Formatter.safariextz
 [2]: http://github.com/rfletcher/safari-json-formatter/commit/HEAD.json
-[i1]: http://github.com/rfletcher/safari-json-formatter/images/before.png
-[i2]: http://github.com/rfletcher/safari-json-formatter/images/after.png
+[i1]: http://github.com/rfletcher/safari-json-formatter/raw/HEAD/images/before.png
+[i2]: http://github.com/rfletcher/safari-json-formatter/raw/HEAD/images/after.png
