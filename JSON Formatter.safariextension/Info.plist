@@ -47,6 +47,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://github.com/rfletcher/safari-json-formatter/raw/latest/Update.plist</string>
 	<key>Website</key>
 	<string>http://github.com/rfletcher/safari-json-formatter</string>
 </dict>
