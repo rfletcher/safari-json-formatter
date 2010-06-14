@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>JSON Formatter</string>
 	<key>CFBundleIdentifier</key>
-	<string>ch.flet.safari.formattedjson</string>
+	<string>ch.flet.safari.jsonformatter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
