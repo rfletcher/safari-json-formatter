@@ -23,7 +23,7 @@ known example of this is kind of discrepancy is between number formats -- if the
 original JSON contains the numeric value 1e2, for example, the formatted JSON
 will display the value 100.
 
-[1]: http://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter.safariextz
+[1]: http://github.com/rfletcher/safari-json-formatter/downloads
 [2]: http://github.com/rfletcher/safari-json-formatter/commit/HEAD.json
 [i1]: http://github.com/rfletcher/safari-json-formatter/raw/HEAD/images/before.png
 [i2]: http://github.com/rfletcher/safari-json-formatter/raw/HEAD/images/after.png
