@@ -24,6 +24,11 @@
         if( e.name === "setSettings" ) {
           settings = e.message;
 
+          // inject CSS
+          var style = formatJSON._html( '<style type="text/css"/>' );
+          style.innerHTML = settings.style;
+          document.body.appendChild( style );
+
           // render formatted JSON
           formatJSON._append( document.body, formatJSON.render( obj ) );
         }
@@ -31,7 +36,6 @@
 
       // ask proxy.html for settings
       safari.self.tab.dispatchMessage( "getSettings" );
-
     },
 
     /**
