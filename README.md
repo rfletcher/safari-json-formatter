@@ -3,9 +3,9 @@
 A Safari extension which makes valid JSON documents human-readable.
 
 ### Before:
-![Before JSON Formatter][i1]
+![Before][i1]
 ### After:
-![After JSON Formatter][i2]
+![After][i2]
 
 ## Installation
 [Download the extension][1] and open it with Safari 5.
