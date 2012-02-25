@@ -5,8 +5,8 @@
     safari.application.addEventListener( "message", function( e ) {
       if( e.name === "getSettings" ) {
         e.target.page.dispatchMessage( "setSettings", {
-          sort_keys: safari.extension.settings.getItem( "sort_keys" ),
-          style: document.head.getElementsByTagName( 'style' )[0].textContent
+          css: document.head.getElementsByTagName( "style" )[0].textContent,
+          sort_keys: safari.extension.settings.getItem( "sort_keys" )
         } );
       }
     }, false );
@@ -21,8 +21,9 @@
     }
 
     body {
-      padding-left:1.5em;
       font-family: monospace;
+      margin: 0;
+      padding: 1em 1em 1em 2em;
     }
     body,
     .delimiter,
@@ -52,31 +53,43 @@
 
     /* values */
     span.value { color: #339; }
-    span.string, span.string .decorator { color: #393; }
+    span.string,
+    span.string .decorator { color: #393; }
     span.string {
       display: block;
       margin-left: 1.5em;
       white-space: pre-wrap;
     }
 
-    /* toggle arrows*/
-    .array, .object { position:relative; }
-    span.toggle {
-      position:absolute; top:4px; left:-20px;
-      display:block; width:0; height:0;
-      -webkit-transform:scale(0.55,1);
-      border:10px solid transparent;
-      border-top-color:black;
-      cursor:pointer;
+    /* disclosure triangles */
+    .collapsible {
+      position: relative;
     }
-    span.toggle.closed {
-      top:0; left:-15px;
-      border-left-color:black;
-      border-top-color:transparent;
-      -webkit-transform:scale(1,0.55);
+    .disclosure {
+       -webkit-transform: scale(0.65, 1);
+
+      border: 0.65em solid transparent;
+      border-top-color: #000;
+      border-bottom-width: 0;
+      cursor: pointer;
+      height: 0;
+      top: 0.3em;
+      left: -1.2em;
+      position: absolute;
+      width: 0;
     }
-    span.toggle.closed~ol, span.toggle.closed~dl { display:none; }
-    span.toggle.closed+.decorator::after { content:'...'; }
+    .collapsible.closed > .disclosure {
+      -webkit-transform: scale(1, 0.65);
+
+      border: 0.65em solid transparent;
+      border-left-color: #000;
+      border-right-width: 0;
+      top: 0;
+      left: -0.95em;
+    }
+    .collapsible.closed > ol,
+    .collapsible.closed > dl { display: none; }
+    .collapsible.closed > .disclosure + .decorator::after { content: '...'; }
 
     /* separation between labels and values */
     dt { margin-right: 0.5em; }
@@ -85,7 +98,7 @@
     .decorator,
     .delimiter,
     .separator,
-    .toggle {
+    .disclosure {
       opacity: 0.5;
     }
   </style>

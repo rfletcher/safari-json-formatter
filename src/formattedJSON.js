@@ -24,13 +24,9 @@
         if( e.name === "setSettings" ) {
           settings = e.message;
 
-          // inject CSS
-          var style = formatJSON._html( '<style type="text/css"/>' );
-          style.innerHTML = settings.style;
-          document.body.appendChild( style );
-
-          // render formatted JSON
-          formatJSON._append( document.body, formatJSON.render( obj ) );
+          formatJSON.addStyle( settings.css );
+          formatJSON.renderAsJSON( obj );
+          formatJSON.handleEvents();
         }
       }, false );
 
@@ -52,7 +48,7 @@
       }
       return parent;
     },
-    
+
     /**
      * convert an html string into one or more nodes
      *  _html( "<div/>" ) => <div/>
@@ -90,6 +86,34 @@
     },
 
     /**
+     * inject css rules into the document
+     *  addStyle( "a { color: blue; }" )
+     */
+    addStyle: function( css ) {
+      var style = formatJSON._html( '<style type="text/css"/>' );
+      style.innerHTML = css;
+      document.body.appendChild( style );
+    },
+
+    /**
+     * handle javascript events
+     */
+    handleEvents: function() {
+      var disclosure_triangles = document.querySelectorAll( ".disclosure" ),
+
+      handler = function( e ) {
+        var parent = e.target.parentElement;
+        parent.className = parent.className.replace( /( closed)?$/, function( closed ) {
+          return closed ? "" : " closed";
+        } );
+      };
+
+      Array.prototype.forEach.call( disclosure_triangles, function( el ) {
+        el.addEventListener( "click", handler );
+      } );
+    },
+
+    /**
      * render an array as HTML
      *  renderArray( [] ) => Element
      */
@@ -99,14 +123,21 @@
         this._append( list, this._append( this._html( "<li/>" ), this.render( a[i] ) ) );
       }
       return this._append(
-        this._html( '<div class="array"/>' ),
+        this._html( '<div class="array collapsible"/>' ),
           this._html(
-            '<span class="toggle"></span>',
+            '<span class="disclosure"></span>',
             '<span class="decorator">[</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">]</span>', '<span class="separator">,</span>'
           )
         );
+    },
+
+    /**
+     * render a javascript object as JSON
+     */
+    renderAsJSON: function( obj ) {
+      this._append( document.body, this.render( obj ) )
     },
 
     /**
@@ -130,8 +161,9 @@
       }
 
       return this._append(
-        this._html( '<div class="object"/>' ),
-          this._html( '<span class="toggle"></span>',
+        this._html( '<div class="object collapsible"/>' ),
+          this._html(
+            '<span class="disclosure"></span>',
             '<span class="decorator">{</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">}</span>',
