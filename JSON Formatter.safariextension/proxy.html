@@ -21,6 +21,7 @@
     }
 
     body {
+      padding-left:1.5em;
       font-family: monospace;
     }
     body,
@@ -58,13 +59,33 @@
       white-space: pre-wrap;
     }
 
+    /* toggle arrows*/
+    .array, .object { position:relative; }
+    span.toggle {
+      position:absolute; top:4px; left:-20px;
+      display:block; width:0; height:0;
+      -webkit-transform:scale(0.55,1);
+      border:10px solid transparent;
+      border-top-color:black;
+      cursor:pointer;
+    }
+    span.toggle.closed {
+      top:0; left:-15px;
+      border-left-color:black;
+      border-top-color:transparent;
+      -webkit-transform:scale(1,0.55);
+    }
+    span.toggle.closed~ol, span.toggle.closed~dl { display:none; }
+    span.toggle.closed+.decorator::after { content:'...'; }
+
     /* separation between labels and values */
     dt { margin-right: 0.5em; }
 
     /* dim the delimiters */
     .decorator,
     .delimiter,
-    .separator {
+    .separator,
+    .toggle {
       opacity: 0.5;
     }
   </style>
