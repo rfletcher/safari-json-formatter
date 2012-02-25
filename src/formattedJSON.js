@@ -101,6 +101,7 @@
       return this._append(
         this._html( '<div class="array"/>' ),
           this._html(
+            '<span class="toggle"></span>',
             '<span class="decorator">[</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">]</span>', '<span class="separator">,</span>'
@@ -130,7 +131,8 @@
 
       return this._append(
         this._html( '<div class="object"/>' ),
-          this._html( '<span class="decorator">{</span>',
+          this._html( '<span class="toggle"></span>',
+            '<span class="decorator">{</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">}</span>',
             '<span class="separator">,</span>'
