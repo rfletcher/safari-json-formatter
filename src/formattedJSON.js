@@ -126,7 +126,7 @@
       var toolbar = this._html( html );
       document.body.insertBefore( toolbar, document.body.firstChild );
 
-      var toggle = document.getElementById( "toolbar" ).getElementsByTagName( "a" )[0];
+      var toggle = document.getElementById( "toolbar" ).getElementsByTagName( "li" )[0];
 
       toggle.addEventListener( "click", function() {
         formatJSON._toggleClass( document.body, "before" );

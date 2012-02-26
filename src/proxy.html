@@ -61,9 +61,10 @@
       -webkit-user-select: none;
       z-index: 9999;
     }
-    #toolbar a {
+    #toolbar li {
       background: -webkit-gradient( linear, 0 0, 0 100%, from(#f4f4f4), to(#bebebe) );
       color: #3f3f3f;
+      cursor: pointer;
       display: inline-block;
       font-size: 11px;
       font-weight: bold;
@@ -72,7 +73,7 @@
       text-decoration: none;
       text-shadow: 0 1px rgba(255, 255, 255, 0.8);
     }
-    #toolbar a:active {
+    #toolbar li:active {
       background: -webkit-gradient( linear, 0 0, 0 100%, from(#bebebe), to(#f4f4f4) );
     }
 
@@ -148,7 +149,7 @@
 </head>
 <body>
   <ul id="toolbar">
-    <li><a href="#">Toggle Formatting</a></li>
+    <li>Toggle Formatting</li>
   </ul>
 </body>
 </html>
