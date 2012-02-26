@@ -118,7 +118,7 @@
      *  renderArray( [] ) => Element
      */
     renderArray: function( a ) {
-      var list = this._html( "<ol/>" );
+      var list = this._html( '<ol start="0"/>' );
       for( var i = 0, ii = a.length; i < ii; i++ ) {
         this._append( list, this._append( this._html( "<li/>" ), this.render( a[i] ) ) );
       }
