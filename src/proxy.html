@@ -133,7 +133,10 @@
       left: -0.95em;
     }
     .collapsible.closed > .value { display: none; }
-    .collapsible.closed > .disclosure + .decorator::after { content: '...'; }
+    .collapsible.closed > .disclosure + .decorator::after {
+      color: #339;
+      content: "...";
+    }
 
     /* separation between labels and values */
     dt { margin-right: 0.5em; }
