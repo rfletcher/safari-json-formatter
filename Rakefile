@@ -7,7 +7,6 @@ task :default do
   assets = [
     "etc/Info.plist",
     "etc/Settings.plist",
-    "etc/Update.plist",
     "src/*"
   ]
 
