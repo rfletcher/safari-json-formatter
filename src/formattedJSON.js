@@ -21,22 +21,23 @@
         return;
       }
 
-      // hide the unformatted JSON text
-      document.body.innerHTML = "";
+      this.preparePage();
 
       // receive settings from proxy.html
       safari.self.addEventListener( "message", function( e ) {
-        if( e.name === "setSettings" ) {
-          settings = e.message;
+        if( e.name === "setData" ) {
+          var data = e.message;
+          settings = data.settings;
 
-          formatJSON.addStyle( settings.css );
-          formatJSON.renderAsJSON( obj );
+          formatJSON.addStyle( data.css );
+          formatJSON.addToolbar( data.toolbar );
+          formatJSON.renderRoot( obj );
           formatJSON.handleEvents();
         }
       }, false );
 
       // ask proxy.html for settings
-      safari.self.tab.dispatchMessage( "getSettings" );
+      safari.self.tab.dispatchMessage( "getData" );
     },
 
     /**
@@ -75,6 +76,24 @@
     },
 
     /**
+     * toggle the presense of a css class name
+     *  _toggleClass( <a class="foo"/>, "bar" ) => <a class="foo bar"/>
+     *  _toggleClass( <a class="foo bar"/>, "bar" ) => <a class="foo"/>
+     */
+    _toggleClass: function( el, class_name ) {
+      var class_names = el.className.split( " " );
+      if( class_names.indexOf( class_name ) >= 0 ) {
+        class_names = class_names.filter( function( val ) {
+          return val.toLowerCase() !== class_name.toLowerCase();
+        } );
+      } else {
+        class_names.push( class_name );
+      }
+
+      el.className = class_names.join( " " );
+    },
+
+    /**
      * a slightly more informative "typeof"
      *  _typeof( [] ) => "array"
      *  _typeof( 1 ) => "number"
@@ -101,21 +120,48 @@
     },
 
     /**
+     * add the toolbar
+     */
+    addToolbar: function( html ) {
+      var toolbar = this._html( html );
+      document.body.insertBefore( toolbar, document.body.firstChild );
+
+      var toggle = document.getElementById( "toolbar" ).getElementsByTagName( "a" )[0];
+
+      toggle.addEventListener( "click", function() {
+        formatJSON._toggleClass( document.body, "before" );
+      } );
+    },
+
+    /**
      * handle javascript events
      */
     handleEvents: function() {
       var disclosure_triangles = document.querySelectorAll( ".disclosure" ),
 
       handler = function( e ) {
-        var parent = e.target.parentElement;
-        parent.className = parent.className.replace( /( closed)?$/, function( closed ) {
-          return closed ? "" : " closed";
-        } );
+        formatJSON._toggleClass( e.target.parentElement, "closed" );
       };
 
       Array.prototype.forEach.call( disclosure_triangles, function( el ) {
         el.addEventListener( "click", handler );
       } );
+    },
+
+    /**
+     * hide the unformatted JSON text.
+     * add a wrapper for the formatted JSON.
+     */
+    preparePage: function() {
+      var json = document.body.textContent;
+      document.body.innerHTML = "";
+
+      this._append( document.body, [
+        this._html( '<div id="before"></div>' ),
+        this._html( '<div id="after"></div>' ),
+      ] );
+
+      document.getElementById( "before" ).innerText = json;
     },
 
     /**
@@ -136,13 +182,6 @@
             '<span class="decorator">]</span>', '<span class="separator">,</span>'
           )
         );
-    },
-
-    /**
-     * render a javascript object as JSON
-     */
-    renderAsJSON: function( obj ) {
-      this._append( document.body, this.render( obj ) )
     },
 
     /**
@@ -175,6 +214,13 @@
             '<span class="separator">,</span>'
           )
         );
+    },
+
+    /**
+     * render a javascript object as JSON
+     */
+    renderRoot: function( obj ) {
+      this._append( document.getElementById( "after" ), this.render( obj ) );
     },
 
     /**
@@ -211,4 +257,4 @@
 
   // initialize!
   formatJSON.init();
-}() )
+}() );

@@ -3,10 +3,13 @@
 <head>
   <script type="text/javascript">
     safari.application.addEventListener( "message", function( e ) {
-      if( e.name === "getSettings" ) {
-        e.target.page.dispatchMessage( "setSettings", {
+      if( e.name === "getData" ) {
+        e.target.page.dispatchMessage( "setData", {
           css: document.head.getElementsByTagName( "style" )[0].textContent,
-          sort_keys: safari.extension.settings.getItem( "sort_keys" )
+          toolbar: document.getElementById( "toolbar" ).outerHTML,
+          settings: {
+            sort_keys: safari.extension.settings.getItem( "sort_keys" )
+          }
         } );
       }
     }, false );
@@ -23,13 +26,52 @@
     body {
       font-family: monospace;
       margin: 0;
-      padding: 1em 1em 1em 2em;
+      padding: 12px;
     }
     body,
     .delimiter,
     .decorator,
     .separator {
       color: #000;
+    }
+
+    #before { display: none; }
+    body.before #before { display: block; }
+    body.before #after { display: none; }
+    body.before #toolbar { position: static; }
+
+    #after {
+      padding-left: 1em;
+    }
+
+    #toolbar {
+      border: 1px solid #8c8c8c;
+      border-radius: 5px;
+      float: right;
+      font-family: "lucida grande", sans-serif;
+      overflow: hidden;
+      font-size: 0;
+      padding: 0;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      margin: 0 0 6px 6px;
+      -webkit-user-select: none;
+      z-index: 9999;
+    }
+    #toolbar a {
+      background: -webkit-gradient( linear, 0 0, 0 100%, from(#f4f4f4), to(#bebebe) );
+      color: #3f3f3f;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 21px;
+      padding: 0 7px 1px;
+      text-decoration: none;
+      text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+    }
+    #toolbar a:active {
+      background: -webkit-gradient( linear, 0 0, 0 100%, from(#bebebe), to(#f4f4f4) );
     }
 
     dl,
@@ -103,5 +145,9 @@
     }
   </style>
 </head>
-<body></body>
+<body>
+  <ul id="toolbar">
+    <li><a href="#">Toggle Formatting</a></li>
+  </ul>
+</body>
 </html>
