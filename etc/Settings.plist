@@ -2,15 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
+  <dict>
+    <key>DefaultValue</key>
+    <true/>
+    <key>Key</key>
+    <string>sort_keys</string>
+    <key>Title</key>
+    <string>Sort Object Keys</string>
+    <key>Type</key>
+    <string>CheckBox</string>
+  </dict>
+  <dict>
+    <key>DefaultValue</key>
+    <true/>
+    <key>Key</key>
+    <string>fold_strings</string>
+    <key>Title</key>
+    <string>Auto-Fold Long Strings</string>
+    <key>Type</key>
+    <string>CheckBox</string>
+  </dict>
 	<dict>
 		<key>DefaultValue</key>
-		<true/>
+		<real>512</real>
 		<key>Key</key>
-		<string>sort_keys</string>
+		<string>long_string_length</string>
 		<key>Title</key>
-		<string>Sort Object Keys</string>
+		<string>"Long String" Threshold (bytes)</string>
 		<key>Type</key>
-		<string>CheckBox</string>
+		<string>TextField</string>
 	</dict>
 </array>
 </plist>

@@ -8,6 +8,8 @@
           css: document.head.getElementsByTagName( "style" )[0].textContent,
           toolbar: document.getElementById( "toolbar" ).outerHTML,
           settings: {
+            fold_strings: safari.extension.settings.getItem( "fold_strings" ),
+            long_string_length: safari.extension.settings.getItem( "long_string_length" ),
             sort_keys: safari.extension.settings.getItem( "sort_keys" )
           }
         } );
@@ -95,11 +97,12 @@
 
     /* values */
     span.value { color: #339; }
-    span.string,
-    span.string .decorator { color: #393; }
-    span.string {
-      display: block;
-      margin-left: 1.5em;
+    div.string .value,
+    div.string .decorator {
+      color: #393;
+    }
+    div.string {
+      padding-left: 1.5em;
       white-space: pre-wrap;
     }
 
@@ -129,8 +132,7 @@
       top: 0;
       left: -0.95em;
     }
-    .collapsible.closed > ol,
-    .collapsible.closed > dl { display: none; }
+    .collapsible.closed > .value { display: none; }
     .collapsible.closed > .disclosure + .decorator::after { content: '...'; }
 
     /* separation between labels and values */

@@ -169,10 +169,12 @@
      *  renderArray( [] ) => Element
      */
     renderArray: function( a ) {
-      var list = this._html( '<ol start="0"/>' );
+      var list = this._html( '<ol start="0" class="value"/>' );
+
       for( var i = 0, ii = a.length; i < ii; i++ ) {
         this._append( list, this._append( this._html( "<li/>" ), this.render( a[i] ) ) );
       }
+
       return this._append(
         this._html( '<div class="array collapsible"/>' ),
           this._html(
@@ -189,7 +191,7 @@
      *  renderObject( {} ) => Element
      */
     renderObject: function( obj ) {
-      var keys = [], list = this._html( "<dl/>" );
+      var keys = [], list = this._html( '<dl class="value"/>' );
 
       // gather keys for sorting
       for( var i in obj ) {
@@ -224,14 +226,33 @@
     },
 
     /**
-     * render a literal value as HTML
-     *  renderValue( "foo" ) => Element
+     * render a javascript string as JSON
      */
-    renderValue: function( l, quote ) {
+    renderString: function( obj ) {
+      var collapsible = obj.length > parseInt( settings.long_string_length, 10 ),
+          collapsed = collapsible && settings.fold_strings,
+          class_names = ["string"];
+
+      if( collapsible ) { class_names.push( "collapsible" ); }
+      if( collapsed ) { class_names.push( "closed" ); }
+
+      return this._append(
+        this._html( '<div class="' + class_names.join( " " ) + '"/>' ),
+          this._html(
+            collapsible ? '<span class="disclosure"></span>' : '',
+            '<span class="decorator">"</span>',
+            this._append( this._html( '<span class="value"/>' ), document.createTextNode( obj ) ),
+            '<span class="decorator">"</span>'
+          )
+        );
+    },
+
+    /**
+     * render a literal value as HTML
+     *  renderValue( true ) => Element
+     */
+    renderValue: function( l ) {
       var val = document.createTextNode( l );
-      if( quote ) {
-        val = this._html( '<span class="decorator">"</span>', val, '<span class="decorator">"</span>' );
-      }
       return this._append( this._append( this._html( '<span class="value"/>' ), val ), this._html( '<span class="separator">,</span>' ) );
     },
 
@@ -244,11 +265,11 @@
       switch( t ) {
         case "array":  return this.renderArray( obj );
         case "object": return this.renderObject( obj );
+        case "string": return this.renderString( obj );
         case "boolean":
         case "null":
         case "number":
-        case "string":
-          var el = this.renderValue( obj, t == "string" );
+          var el = this.renderValue( obj );
           el.className += " " + t;
           return el;
       }
