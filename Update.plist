@@ -10,11 +10,11 @@
         <key>Developer Identifier</key>
         <string>7X732ETE87</string>
         <key>CFBundleVersion</key>
-        <string>2</string>
+        <string>3</string>
         <key>CFBundleShortVersionString</key>
-        <string>1.0.1</string>
+        <string>1.1</string>
         <key>URL</key>
-        <string>http://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.0.1.safariextz</string>
+        <string>http://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.1.safariextz</string>
       </dict>
     </array>
   </dict>
