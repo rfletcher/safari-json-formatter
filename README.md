@@ -14,6 +14,15 @@ A Safari extension which makes valid JSON documents human-readable.
 Once installed, load any valid JSON document. [This project's most recent
 commit][2] makes a good example.
 
+#### Version History
+
+### 1.1
+* Added folding of arrays, objects and long strings
+* Added setting for auto-folding of long strings (default: on)
+* Added setting for "long string" threshold (default 512 bytes)
+* Added a "toggle formatting" button to switch between formatted and original JSON
+* Bug Fixes
+
 #### Caveats
 The extension aims to produce the same JSON string that's been loaded as input,
 but because the original JSON has actually been parsed, some transformation may
