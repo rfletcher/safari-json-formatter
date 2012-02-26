@@ -5,6 +5,9 @@
      *  TODO: examine the document's content-type (appears to be impossible)
      */
     init: function() {
+      if (window != window.top) {
+        return;
+      }
       // attempt to parse the body as JSON
       try {
         var obj = JSON.parse( document.body.textContent
