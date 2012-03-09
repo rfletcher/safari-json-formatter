@@ -176,9 +176,9 @@
       }
 
       return this._append(
-        this._html( '<div class="array collapsible"/>' ),
+        this._html( '<div class="array'+(list.childNodes.length ? ' collapsible' : '')+'"/>' ),
           this._html(
-            '<span class="disclosure"></span>',
+            list.childNodes.length ? '<span class="disclosure"></span>' : '',
             '<span class="decorator">[</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">]</span>', '<span class="separator">,</span>'
@@ -207,9 +207,9 @@
       }
 
       return this._append(
-        this._html( '<div class="object collapsible"/>' ),
+        this._html( '<div class="object'+(list.childNodes.length ? ' collapsible' : '')+'"/>' ),
           this._html(
-            '<span class="disclosure"></span>',
+            list.childNodes.length ? '<span class="disclosure"></span>' : '',
             '<span class="decorator">{</span>',
             list.childNodes.length ? list : '',
             '<span class="decorator">}</span>',
