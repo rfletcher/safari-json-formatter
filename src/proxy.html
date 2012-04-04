@@ -47,6 +47,7 @@
     }
 
     #toolbar {
+      background: -webkit-gradient( linear, 0 0, 0 100%, from(#f4f4f4), to(#bebebe) );
       border: 1px solid #8c8c8c;
       border-radius: 5px;
       float: right;
@@ -61,8 +62,10 @@
       -webkit-user-select: none;
       z-index: 9999;
     }
+    #toolbar:active {
+      background: -webkit-gradient( linear, 0 0, 0 100%, from(#bebebe), to(#f4f4f4) );
+    }
     #toolbar li {
-      background: -webkit-gradient( linear, 0 0, 0 100%, from(#f4f4f4), to(#bebebe) );
       color: #3f3f3f;
       cursor: pointer;
       display: inline-block;
@@ -72,9 +75,6 @@
       padding: 0 7px 1px;
       text-decoration: none;
       text-shadow: 0 1px rgba(255, 255, 255, 0.8);
-    }
-    #toolbar li:active {
-      background: -webkit-gradient( linear, 0 0, 0 100%, from(#bebebe), to(#f4f4f4) );
     }
 
     dl,
