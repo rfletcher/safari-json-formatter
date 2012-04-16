@@ -4,6 +4,16 @@
 <array>
   <dict>
     <key>DefaultValue</key>
+    <false/>
+    <key>Key</key>
+    <string>unescape_unicode</string>
+    <key>Title</key>
+    <string>Unescape Unicode</string>
+    <key>Type</key>
+    <string>CheckBox</string>
+  </dict>
+  <dict>
+    <key>DefaultValue</key>
     <true/>
     <key>Key</key>
     <string>sort_keys</string>

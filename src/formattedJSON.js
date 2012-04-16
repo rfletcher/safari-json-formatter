@@ -10,25 +10,28 @@
         return;
       }
 
-      // attempt to parse the body as JSON
-      try {
-        var obj = JSON.parse( document.body.textContent
-          .split( "\\" ).join( "\\\\" ) // double-up on escape sequences
-          .split( '\\\"' ).join( "\\\\\"" ) // at this point quotes have been unescaped.  re-escape them.
-        );
-      } catch( e ) {
-        // invalid JSON :(
-        return;
-      }
-
-      this.preparePage();
-
       // receive settings from proxy.html
       safari.self.addEventListener( "message", function( e ) {
         if( e.name === "setData" ) {
           var data = e.message;
           settings = data.settings;
 
+          // attempt to parse the body as JSON
+          try {
+            var s = document.body.textContent;
+            if ( settings.unescape_unicode ) {
+              s = JSON.stringify( JSON.parse( s ) );
+            }
+            var obj = JSON.parse( s
+              .split( "\\" ).join( "\\\\" ) // double-up on escape sequences
+              .split( '\\\"' ).join( "\\\\\"" ) // at this point quotes have been unescaped.  re-escape them.
+            );
+          } catch( e ) {
+            // invalid JSON :(
+            return;
+          }
+
+          formatJSON.preparePage();
           formatJSON.addStyle( data.css );
           formatJSON.addToolbar( data.toolbar );
           formatJSON.renderRoot( obj );
