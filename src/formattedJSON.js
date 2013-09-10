@@ -202,7 +202,8 @@
       }
 
       for( var i = 0, ii = keys.length; i < ii; i++ ) {
-        this._append( list, this._append( this._html( "<dt/>" ), this._html( '<span class="decorator">"</span>', document.createTextNode( keys[i] ), '<span class="decorator">"</span>', '<span class="delimiter">:</span>' ) ) );
+        var k = eval('"'+keys[i]+'"');
+        this._append( list, this._append( this._html( "<dt/>" ), this._html( '<span class="decorator">"</span>', document.createTextNode( k ), '<span class="decorator">"</span>', '<span class="delimiter">:</span>' ) ) );
         this._append( list, this._append( this._html( "<dd/>" ), this.render( obj[keys[i]] ) ) );
       }
 
@@ -229,6 +230,7 @@
      * render a javascript string as JSON
      */
     renderString: function( obj ) {
+      obj = eval('"'+obj+'"');
       var collapsible = obj.length > parseInt( settings.long_string_length, 10 ),
           collapsed = collapsible && settings.fold_strings,
           class_names = ["string"];
@@ -241,7 +243,7 @@
           this._html(
             collapsible ? '<span class="disclosure"></span>' : '',
             '<span class="decorator">"</span>',
-            this._append( this._html( '<span class="value"/>' ), document.createTextNode( obj ) ),
+            this._append( this._html( '<span class="value"/>' ), document.createTextNode( obj )),
             '<span class="decorator">"</span>',
             '<span class="separator">,</span>'
           )
