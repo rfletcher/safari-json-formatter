@@ -236,12 +236,13 @@
       if( collapsible ) { class_names.push( "collapsible" ); }
       if( collapsed ) { class_names.push( "closed" ); }
 
+	  var ins = obj.match(/^https?:\/\//) ? this._append( this._html( '<a href="' + obj + '"/>'), document.createTextNode( obj )) : document.createTextNode( obj )
       return this._append(
         this._html( '<div class="' + class_names.join( " " ) + '"/>' ),
           this._html(
             collapsible ? '<span class="disclosure"></span>' : '',
             '<span class="decorator">"</span>',
-            this._append( this._html( '<span class="value"/>' ), document.createTextNode( obj ) ),
+            this._append( this._html( '<span class="value"/>' ), ins ),
             '<span class="decorator">"</span>',
             '<span class="separator">,</span>'
           )
