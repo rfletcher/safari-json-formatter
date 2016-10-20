@@ -241,7 +241,7 @@
           this._html(
             collapsible ? '<span class="disclosure"></span>' : '',
             '<span class="decorator">"</span>',
-            this._append( this._html( '<span class="value"/>' ), document.createTextNode( obj ) ),
+            this._append( this._html( '<span class="value"/>' ), document.createTextNode( unescape( obj ) ) ),
             '<span class="decorator">"</span>',
             '<span class="separator">,</span>'
           )
